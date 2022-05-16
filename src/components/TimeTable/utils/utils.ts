@@ -1,5 +1,5 @@
 export function twentyFourHToIsoDateString(timeString: string) {
-  if (!RegExp("^(1?[0-9]|2[0-3]):[0-5][0-9]$").test(timeString)) {
+  if (!RegExp("^((0|1)?[0-9]|2[0-3]):[0-5][0-9]$").test(timeString)) {
     return null;
   }
   const newDate = new Date();

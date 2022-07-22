@@ -4,7 +4,7 @@
       backgroundColor: 'white',
       borderRadius: '10px',
       width: width,
-      height: height || null,
+      height: height,
       overflowY: 'auto',
     }"
   >

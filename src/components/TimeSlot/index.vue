@@ -40,6 +40,7 @@ export default defineComponent({
   },
   watch: {
     isFocus(newIsFocus) {
+      console.log("scroll depuis timeslot")
       if (newIsFocus) {
       
         this.$emit("scrollToActiveSlot", this.$el.offsetTop);

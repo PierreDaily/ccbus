@@ -8,12 +8,6 @@ export default {
   argTypes: {
       isActive: { control: 'boolean' },
       title: { control: 'text' },
-    // backgroundColor: { control: 'color' },
-    // onClick: {},
-    // size: {
-    //   control: { type: 'select' },
-    //   options: ['small', 'medium', 'large'],
-    // },
   },
 };
 

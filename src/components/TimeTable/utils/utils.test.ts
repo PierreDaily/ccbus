@@ -56,7 +56,7 @@ describe("twentyFourHToIsoDateString ", () => {
     expect(result).toBe(expectedDate.toISOString());
   });
 
-  it("should return null if the input start with more than 2 zero", () => {
+  it("should return an empty string if the input start with more than 2 zero", () => {
     // arrange
 
 
@@ -69,6 +69,6 @@ describe("twentyFourHToIsoDateString ", () => {
 
     // assert
 
-    expect(result).toBeNull();
+    expect(result).toBe("");
   });
 });

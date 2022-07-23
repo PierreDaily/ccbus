@@ -2,7 +2,7 @@
 
 exports[`Mount component 1`] = `
 "<div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"transportation-type\\" data-v-d5c84748=\\"\\">
-  <div data-v-d5c84748=\\"\\"><img src=\\"/@fs/src/assets/icons/bus.svg\\" data-v-d5c84748=\\"\\" /></div>
+  <div data-v-d5c84748=\\"\\"><img src=\\"/src/assets/icons/bus.svg\\" data-v-d5c84748=\\"\\" /></div>
   <div aria-labelledby=\\"test\\" data-v-d5c84748=\\"\\">B</div>
 </div>"
 `;

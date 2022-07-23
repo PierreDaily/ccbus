@@ -12,7 +12,9 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@mdx-js/react": "^2.1.2",
     "normalize.css": "^8.0.1",
+    "vite-plugin-mdx": "^3.5.10",
     "vue": "^3.2.25"
   },
   "devDependencies": {

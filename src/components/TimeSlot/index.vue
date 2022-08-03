@@ -5,7 +5,7 @@
     tabindex="0"
     :style="{ color: isActive ? 'blue' : 'red' }"
   >
-    <BusIcon busLetter="B" />
+    <BusIcon :busLetter="busLetter" />
     <TimeDisplay :time="time" />
     <CountDown
       :timeLeft="timeLeft"
@@ -19,7 +19,7 @@ import { defineComponent } from 'vue'
 import BusIcon from "../BusIcon/index.vue";
 import TimeDisplay from "../TimeDisplay/index.vue";
 import CountDown from "../CountDown/index.vue";
-// import { formatTime, minutesLeft, timeLeft } from "../utils/timeTransformation";
+
 export default defineComponent({
   name: "TimeSlot",
   components: {
@@ -28,6 +28,7 @@ export default defineComponent({
     TimeDisplay,
   },  
   props: {
+    busLetter: String,
     time:String,
     timeLeft: String,
     isActive: Boolean,
@@ -40,7 +41,6 @@ export default defineComponent({
   },
   watch: {
     isFocus(newIsFocus) {
-      console.log("scroll depuis timeslot")
       if (newIsFocus) {
       
         this.$emit("scrollToActiveSlot", this.$el.offsetTop);

@@ -14,20 +14,26 @@
           :timeLeft="timeLeft(minutesLeft(new Date(timeSlot), now))"
           :isActive="new Date(timeSlot || 0) > new Date()"
           :isFocus="index === indexToFocus"
+          :busLetter="activePhase === stop1 ? 'A' : 'B'"
           @scrollToActiveSlot="scrollTo"
         />
       </ul>
     </View>
     <nav class="nav-bar">
-      <ButtonTab
-        title="phase 2-3"
-        :isActive="activePhase === PHASE23 ? true : false"
-        @userClick="setPhase(PHASE23)"
+       <ButtonTab
+        title="bus stop 1"
+        :isActive="activePhase === stop1"
+        @userClick="setPhase(stop1)"
       />
       <ButtonTab
-        title="phase 3-4"
-        :isActive="activePhase === PHASE34 ? true : false"
-        @userClick="setPhase(PHASE34)"
+        title="bus stop 2"
+        :isActive="activePhase === stop2"
+        @userClick="setPhase(stop2)"
+      />
+      <ButtonTab
+        title="bus stop 3"
+        :isActive="activePhase === stop3"
+        @userClick="setPhase(stop3)"
       />
     </nav>
   </Layout>
@@ -44,7 +50,11 @@ import { twentyFourHToIsoDateString } from "./components/TimeTable/utils/utils";
 import { formatTime, minutesLeft, timeLeft } from "./utils";
 import "normalize.css";
 
-type PhaseType = "phase-2-3" | "phase-4-5";
+type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
+
+function isValidBusStop(busStop: string | null): boolean {
+  return busStop === "bus-stop-1" || busStop === "bus-stop-2" || busStop === "bus-stop-3";
+}
 
 export default defineComponent({
   name: "App",
@@ -55,12 +65,10 @@ export default defineComponent({
     TimeSlot,
   },
   data: () => ({
-    activePhase: (localStorage.getItem("activePhase") || "phase-2-3" )as PhaseType,
+    activePhase: ( (isValidBusStop(localStorage.getItem('activePhase')) && localStorage.getItem('activePhase')) || "bus-stop-2" )  as BusStop,
     now: new Date(),
   }),
   created() {
-    this.PHASE23 = "phase-2-3";
-    this.PHASE34 = "phase-4-5";
     document
       ?.querySelector<HTMLElement>(":root")
       ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
@@ -97,8 +105,8 @@ export default defineComponent({
     },
   },
   methods: {
-    setPhase(val: PhaseType) {
-      this.activePhase = val === this.PHASE34 ? this.PHASE34 : this.PHASE23;
+    setPhase(val: BusStop) {
+      this.activePhase = val;
     },
     scrollTo(y: number) {
       this.refView.$el.scrollTo({
@@ -116,8 +124,9 @@ export default defineComponent({
     const refView = ref();
     return {
       allTables: data,
-      PHASE23: "phase-2-3" as PhaseType,
-      PHASE34: "phase-4-5" as PhaseType,
+      stop1: "bus-stop-1" as BusStop,
+      stop2: "bus-stop-2" as BusStop,
+      stop3: "bus-stop-3" as BusStop,
       formatTime,
       minutesLeft,
       refView,
@@ -148,7 +157,7 @@ export default defineComponent({
 
 .nav-bar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; 
   margin-top: 15px;
 }
 
@@ -156,8 +165,12 @@ export default defineComponent({
   flex-grow: 1;
 }
 
+.nav-bar button:nth-of-type(n){
+  margin-right: 10px;
+}
+
 .nav-bar button:last-child {
-  margin-left: 20px;
+  margin-right: 0;
 }
 
 .table-container {

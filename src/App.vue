@@ -55,7 +55,7 @@ export default defineComponent({
     TimeSlot,
   },
   data: () => ({
-    activePhase: "phase-2-3" as PhaseType,
+    activePhase: (localStorage.getItem("activePhase") || "phase-2-3" )as PhaseType,
     now: new Date(),
   }),
   created() {
@@ -90,6 +90,11 @@ export default defineComponent({
 
       return "weekDay";
     }
+  },
+  watch: {
+    activePhase(newPhase) {
+      localStorage.setItem("activePhase", newPhase);
+    },
   },
   methods: {
     setPhase(val: PhaseType) {

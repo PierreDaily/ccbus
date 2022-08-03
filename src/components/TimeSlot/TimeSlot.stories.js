@@ -1,19 +1,23 @@
-import TimeSlot from './index.vue';
+import TimeSlot from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'TimeSlot',
+  title: "TimeSlot",
   component: TimeSlot,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    isActive: { control: 'boolean' },
-    isFocus: { control: 'boolean' },
-    time: {control: { type: 'select' },
-    options: ['12:00 am', '0:00pm', undefined],
+    isActive: { control: "boolean" },
+    isFocus: { control: "boolean" },
+    time: {
+      control: { type: "select" },
+      options: ["12:00 am", "0:00pm", undefined],
+    },
+    timeLeft: {
+      control: { type: "select" },
+      options: ["3 min", "13 min", undefined],
+    },
+    busLetter: { control: "text" },
   },
-    timeLeft: {control: { type: 'select' },
-    options: ['3 min', '13 min', undefined],
-  },}
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
@@ -30,4 +34,3 @@ const Template = (args) => ({
 
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
-

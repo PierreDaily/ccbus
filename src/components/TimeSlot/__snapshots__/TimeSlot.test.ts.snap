@@ -2,9 +2,9 @@
 
 exports[`TimeSlot component > should mount 1`] = `
 "<li class=\\"disable\\" style=\\"color: red;\\" tabindex=\\"0\\" data-v-62a17b5e=\\"\\">
-  <div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"transportation-type\\" data-v-d5c84748=\\"\\" data-v-62a17b5e=\\"\\">
-    <div data-v-d5c84748=\\"\\"><img src=\\"/src/assets/icons/bus.svg\\" data-v-d5c84748=\\"\\" /></div>
-    <div aria-labelledby=\\"test\\" data-v-d5c84748=\\"\\">B</div>
+  <div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden\\" data-v-62a17b5e=\\"\\">
+    <div class=\\"items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light border-r\\"><img src=\\"/src/assets/icons/bus.svg\\" /></div>
+    <div class=\\"items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light\\" aria-labelledby=\\"test\\">B</div>
   </div>
   <div data-v-015bd910=\\"\\" data-v-62a17b5e=\\"\\"><img src=\\"/src/assets/icons/clock.svg\\" data-v-015bd910=\\"\\" /><span data-v-015bd910=\\"\\">12:00am</span></div>
   <div data-v-44ef50d8=\\"\\" data-v-62a17b5e=\\"\\"><img aria-label=\\"coming in\\" src=\\"/src/assets/icons/rss.svg\\" data-v-44ef50d8=\\"\\" /><span style=\\"width: 100px;\\" data-v-44ef50d8=\\"\\">2 min</span></div>

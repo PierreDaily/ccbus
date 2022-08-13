@@ -48,7 +48,7 @@ import View from "./components/View/index.vue";
 import data from "./assets/timestables.json";
 import { twentyFourHToIsoDateString } from "./components/TimeTable/utils/utils";
 import { formatTime, minutesLeft, timeLeft } from "./utils";
-// import "normalize.css";
+import "normalize.css";
 import './index.css'
 
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";

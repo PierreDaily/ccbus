@@ -1,7 +1,7 @@
 <template>
   <div>
-    <img aria-label="coming in" :src="rssIcon" />
-    <span :style="{ width: '100px' }">{{ timeLeft || "---" }}</span>
+    <img class="h-3 relative top-[-1px] left-[-2px] w-3 inline" aria-label="coming in" :src="rssIcon" />
+    <span class="text-black-light font-sans text-lg font-normal leading-5" :style="{ width: '100px' }">{{ timeLeft || "---" }}</span>
   </div>
 </template>
 
@@ -19,22 +19,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-img {
-  height: 12px;
-  left: -2px;
-  position: relative;
-  top: 0px;
-  width: 12px;
-}
-
-span {
-  color: var(--font-color-black);
-  font-family: var(--font-primary);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-}
-</style>

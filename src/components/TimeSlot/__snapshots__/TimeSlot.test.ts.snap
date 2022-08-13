@@ -1,12 +1,12 @@
 // Vitest Snapshot v1
 
 exports[`TimeSlot component > should mount 1`] = `
-"<li class=\\"disable\\" style=\\"color: red;\\" tabindex=\\"0\\" data-v-62a17b5e=\\"\\">
-  <div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden\\" data-v-62a17b5e=\\"\\">
+"<li class=\\"bg-grey-light opacity-60 flex items-center border-solid border-1 border-grey-light h-[60px] justify-between px-6 py-0 text-center\\" style=\\"color: red;\\" tabindex=\\"0\\">
+  <div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden\\">
     <div class=\\"items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light border-r\\"><img src=\\"/src/assets/icons/bus.svg\\" /></div>
     <div class=\\"items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light\\" aria-labelledby=\\"test\\">B</div>
   </div>
-  <div class=\\"h-5 w-[90px]\\" data-v-62a17b5e=\\"\\"><img class=\\"inline h-2.5 w-2.5 relative left-[-2px] top-[-4px]\\" src=\\"/src/assets/icons/clock.svg\\" /><span class=\\"text-black-light inline-block font-sans text-lg font-normal leading-5 text-right\\">12:00am</span></div>
-  <div data-v-62a17b5e=\\"\\"><img class=\\"h-3 relative top-[-1px] left-[-2px] w-3 inline\\" aria-label=\\"coming in\\" src=\\"/src/assets/icons/rss.svg\\" /><span class=\\"text-black-light font-sans text-lg font-normal leading-5\\" style=\\"width: 100px;\\">2 min</span></div>
+  <div class=\\"h-5 w-[90px]\\"><img class=\\"inline h-2.5 w-2.5 relative left-[-2px] top-[-4px]\\" src=\\"/src/assets/icons/clock.svg\\" /><span class=\\"text-black-light inline-block font-sans text-lg font-normal leading-5 text-right\\">12:00am</span></div>
+  <div><img class=\\"h-3 relative top-[-1px] left-[-2px] w-3 inline\\" aria-label=\\"coming in\\" src=\\"/src/assets/icons/rss.svg\\" /><span class=\\"text-black-light font-sans text-lg font-normal leading-5\\" style=\\"width: 100px;\\">2 min</span></div>
 </li>"
 `;

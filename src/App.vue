@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>Timetables</h1>
+    <h1 class="font-bold">Timetables</h1>
     <View
       width="100%"
       height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
@@ -48,7 +48,8 @@ import View from "./components/View/index.vue";
 import data from "./assets/timestables.json";
 import { twentyFourHToIsoDateString } from "./components/TimeTable/utils/utils";
 import { formatTime, minutesLeft, timeLeft } from "./utils";
-import "normalize.css";
+// import "normalize.css";
+import './index.css'
 
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
 

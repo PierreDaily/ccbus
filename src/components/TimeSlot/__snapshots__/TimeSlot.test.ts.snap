@@ -7,6 +7,6 @@ exports[`TimeSlot component > should mount 1`] = `
     <div class=\\"items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light\\" aria-labelledby=\\"test\\">B</div>
   </div>
   <div data-v-015bd910=\\"\\" data-v-62a17b5e=\\"\\"><img src=\\"/src/assets/icons/clock.svg\\" data-v-015bd910=\\"\\" /><span data-v-015bd910=\\"\\">12:00am</span></div>
-  <div data-v-44ef50d8=\\"\\" data-v-62a17b5e=\\"\\"><img aria-label=\\"coming in\\" src=\\"/src/assets/icons/rss.svg\\" data-v-44ef50d8=\\"\\" /><span style=\\"width: 100px;\\" data-v-44ef50d8=\\"\\">2 min</span></div>
+  <div data-v-62a17b5e=\\"\\"><img class=\\"h-3 relative top-[-1px] left-[-2px] w-3 inline\\" aria-label=\\"coming in\\" src=\\"/src/assets/icons/rss.svg\\" /><span class=\\"text-black-light font-sans text-lg font-normal leading-5\\" style=\\"width: 100px;\\">2 min</span></div>
 </li>"
 `;

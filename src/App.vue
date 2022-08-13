@@ -1,12 +1,12 @@
 <template>
   <Layout>
-    <h1 class="font-bold">Timetables</h1>
+    <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables</h1>
     <View
       width="100%"
       height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
       ref="refView"
     >
-      <ul class="table-container">
+      <ul>
         <TimeSlot
           v-for="(timeSlot, index) in activeTimeTable"
           :key="index"
@@ -19,21 +19,24 @@
         />
       </ul>
     </View>
-    <nav class="nav-bar">
+    <nav class="flex justify-between mt-[15px]">
        <ButtonTab
         title="bus stop 1"
         :isActive="activePhase === stop1"
         @userClick="setPhase(stop1)"
+        class="grow mr-2.5"
       />
       <ButtonTab
         title="bus stop 2"
         :isActive="activePhase === stop2"
         @userClick="setPhase(stop2)"
+        class="grow mr-2.5"
       />
       <ButtonTab
         title="bus stop 3"
         :isActive="activePhase === stop3"
         @userClick="setPhase(stop3)"
+        class="grow mr-0"
       />
     </nav>
   </Layout>
@@ -137,60 +140,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-@import "./assets/css/global.css";
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
-
-:root {
-  --border-color: rgba(222, 222, 230, 1);
-  --bus-icon-green: rgba(39, 174, 96, 1);
-
-  --font-primary: "Roboto", sans-serif;
-
-  --font-color-black: rgba(73, 80, 87, 1);
-  --font-color-white: rgba(255, 255, 255, 1);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.nav-bar {
-  display: flex;
-  justify-content: space-between; 
-  margin-top: 15px;
-}
-
-.nav-bar > button {
-  flex-grow: 1;
-}
-
-.nav-bar button:nth-of-type(n){
-  margin-right: 10px;
-}
-
-.nav-bar button:last-child {
-  margin-right: 0;
-}
-
-.table-container {
-  margin: 0;
-  padding: 0;
-  position: relative;
-}
-
-h1 {
-  align-items: center;
-  color: var(--font-color-white);
-  display: flex;
-  font-family: "Roboto";
-  font-style: normal;
-  font-weight: 400;
-  height: 80px;
-  margin: 0;
-
-  font-size: 12px;
-  line-height: 14px;
-}
-</style>

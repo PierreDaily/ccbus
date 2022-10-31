@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <h1>Timetables</h1>
+    <h1>Timetables / updated on 31/10/2022</h1>
     <View
       width="100%"
       height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
@@ -8,13 +8,13 @@
     >
       <ul class="table-container">
         <TimeSlot
-          v-for="(timeSlot, index) in activeTimeTable"
+          v-for="({time, busLetter}, index) in activeTimeTable"
           :key="index"
-          :time="formatTime(new Date(timeSlot))"
-          :timeLeft="timeLeft(minutesLeft(new Date(timeSlot), now))"
-          :isActive="new Date(timeSlot || 0) > new Date()"
+          :time="formatTime(new Date(time))"
+          :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
+          :isActive="new Date(time || 0) > new Date()"
           :isFocus="index === indexToFocus"
-          :busLetter="activePhase === stop1 ? 'A' : 'B'"
+          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
           @scrollToActiveSlot="scrollTo"
         />
       </ul>
@@ -80,16 +80,24 @@ export default defineComponent({
     });
   },
   computed: {
-    activeTimeTable(): string[] {
-      const table = [...this.allTables[this.activePhase][this.dayType]];
-      table.sort((a, b) => {
-        return a > b ? 1 : -1;
+    activeTimeTable(): {time:string, busLetter:string}[] {
+      const tableObj = this.allTables[this.activePhase][this.dayType];
+      let allTable:{time:string, busLetter:string}[]= [];
+      type MyType = "A" | "B" |"CIRCULAR"
+      let key:MyType;
+
+      for (key in tableObj) {
+        allTable = [...allTable, ...tableObj[key].map(val => ({time:val, busLetter: key}))]
+      }
+      allTable.sort((a, b) => {
+        return a.time > b.time ? 1 : -1;
       });
-      return table.map((hhmmDate) => this.twentyFourHToIsoDateString(hhmmDate)).filter((dateString) => dateString !== "");
+      console.log(allTable)
+      return allTable.map((obj) =>({...obj, time: this.twentyFourHToIsoDateString(obj.time)}) ).filter((obj) => obj.time !== "");
     },
     indexToFocus() {
-      return this.activeTimeTable.findIndex((time) => {
-      return new Date(time || 0).toISOString() > this.now.toISOString();
+      return this.activeTimeTable.findIndex((obj) => {
+      return new Date(obj.time || 0).toISOString() > this.now.toISOString();
     });
     },
     dayType(){

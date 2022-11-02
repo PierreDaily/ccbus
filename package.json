@@ -16,7 +16,8 @@
     "normalize.css": "^8.0.1",
     "vite-plugin-mdx": "^3.5.10",
     "vue": "^3.2.25",
-    "vue-gtag": "^2.0.1"
+    "vue-gtag": "^2.0.1",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

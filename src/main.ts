@@ -17,6 +17,6 @@ const routes = [
 createApp(App)
   .use(router)
   .use(VueGtag, {
-    config: { id: import.meta.env.PROD && import.meta.env.Vite_GOOGLE_ANALYTICS_ID },
+    config: { id: import.meta.env.PROD && import.meta.env.VITE_GOOGLE_ANALYTICS_ID },
   })
   .mount("#app");

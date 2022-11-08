@@ -1,7 +1,7 @@
 <template>
   <li
     :class="{ ['bg-grey-light']: !isActive, ['opacity-60']: !isActive}"
-    class="flex items-center border-solid border-1 border-grey-light h-[60px] justify-between px-6 py-0 text-center"
+    class="flex items-center border-solid border-b border-grey-light h-[60px] justify-between px-6 py-0 text-center"
     style=""
     tabindex="0"
     :style="{ color: isActive ? 'blue' : 'red' }"

@@ -1,7 +1,7 @@
 // Vitest Snapshot v1
 
 exports[`TimeSlot component > should mount 1`] = `
-"<li class=\\"bg-grey-light opacity-60 flex items-center border-solid border-1 border-grey-light h-[60px] justify-between px-6 py-0 text-center\\" style=\\"color: red;\\" tabindex=\\"0\\">
+"<li class=\\"bg-grey-light opacity-60 flex items-center border-solid border-b border-grey-light h-[60px] justify-between px-6 py-0 text-center\\" style=\\"color: red;\\" tabindex=\\"0\\">
   <div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden\\">
     <div class=\\"items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light border-r\\"><img src=\\"/src/assets/icons/bus.svg\\" /></div>
     <div class=\\"items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light\\" aria-labelledby=\\"test\\">B</div>

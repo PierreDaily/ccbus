@@ -1,9 +1,9 @@
 <template>
-  <div id ="test" aria-label="B Bus" class="transportation-type">
-    <div>
+  <div id ="test" aria-label="B Bus" class="border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden">
+    <div class="items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light  border-r">
       <img :src="busIcon" />
     </div>
-    <div aria-labelledby="test">{{ busLetter?.toUpperCase() || "B" }}</div>
+    <div class="items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light" aria-labelledby="test">{{ busLetter?.toUpperCase() || "B" }}</div>
   </div>
 </template>
 
@@ -22,38 +22,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.transportation-type {
-  border: solid var(--border-color) 1px;
-  border-radius: 2px;
-  height: 25px;
-  width: 50px;
-  overflow: hidden;
-
-  & > div {
-    align-items: center;
-    display: inline-flex;
-    justify-content: center;
-    width: 50%;
-    height: 100%;
-  }
-
-  & > div:first-child {
-    background-color: var(--bus-icon-green);
-    border-right: solid var(--border-color) 1px;
-  }
-
-  & > div:nth-child(2) {
-    color: var(--font-color-black);
-    font-family: var(--font-primary);
-    vertical-align: top;
-  }
-}
-
-img {
-  display: block;
-  height: 16px;
-  width: 16px;
-}
-</style>

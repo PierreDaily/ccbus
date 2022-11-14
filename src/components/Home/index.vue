@@ -1,6 +1,6 @@
 <template>
     <Layout>
-      <h1>Timetables / updated on 31/10/2022</h1>
+      <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables / updated on 31/10/2022</h1>
       <View
         width="100%"
         height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
@@ -19,21 +19,24 @@
           />
         </ul>
       </View>
-      <nav class="nav-bar">
+      <nav class="flex justify-between mt-[15px]">
          <ButtonTab
           title="bus stop 1"
           :isActive="activePhase === stop1"
           @userClick="setPhase(stop1)"
+          class="grow mr-2.5"
         />
         <ButtonTab
           title="bus stop 2"
           :isActive="activePhase === stop2"
           @userClick="setPhase(stop2)"
+          class="grow mr-2.5"
         />
         <ButtonTab
           title="bus stop 3"
           :isActive="activePhase === stop3"
           @userClick="setPhase(stop3)"
+          class="grow mr-0"
         />
       </nav>
     </Layout>
@@ -146,7 +149,6 @@
   </script>
   
   <style>
-  @import "../../assets/css/global.css";
   @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
   
   :root {

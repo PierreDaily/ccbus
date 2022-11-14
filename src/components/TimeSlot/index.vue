@@ -1,6 +1,7 @@
 <template>
   <li
-    :class="{ disable: !isActive }"
+    :class="{ ['bg-grey-light']: !isActive, ['opacity-60']: !isActive}"
+    class="flex items-center border-solid border-b border-grey-light h-[60px] justify-between px-6 py-0 text-center"
     style=""
     tabindex="0"
     :style="{ color: isActive ? 'blue' : 'red' }"
@@ -49,21 +50,3 @@ export default defineComponent({
     },
 });
 </script>
-
-<style scoped>
-li {
-  align-items: center;
-  border-bottom: solid 1px var(--border-color);
-  display: flex;
-  height: 60px;
-  justify-content: space-between;
-  list-style: none;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.disable {
-  background-color: var(--border-color);
-  opacity: 0.6;
-}
-</style>

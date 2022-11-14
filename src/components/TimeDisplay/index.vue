@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <img :src="clockIcon" />
-    <span>{{time || '--:--'}}</span>
+  <div class="h-5 w-[90px] ">
+    <img class="inline h-2.5 w-2.5 relative left-[-2px] top-[-4px] " :src="clockIcon" />
+    <span class="text-black-light inline-block font-sans text-lg font-normal leading-5 text-right">{{time || '--:--'}}</span>
   </div>
 </template>
 
@@ -20,29 +20,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-div {
-  height: 20px;
-  width: 90px;
-}
-
-span {
-  color: var(--font-color-black);
-  display: inline-block;
-  font-family: var(--font-primary);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 21px;
-  text-align: right;
-}
-
-img {
-  height: 10px;
-  left: -2px;
-  position: relative;
-  top: -4px;
-  width: 10px;
-}
-</style>

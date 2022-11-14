@@ -6,6 +6,7 @@
 import { defineComponent } from "vue";
 
 import "normalize.css";
+import './index.css'
 
 
 
@@ -14,4 +15,3 @@ export default defineComponent({
 });
 
 </script>
-

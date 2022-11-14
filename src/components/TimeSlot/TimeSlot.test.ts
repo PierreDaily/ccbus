@@ -34,7 +34,7 @@ describe("TimeSlot component", () => {
         //assert
       
           expect(wrapper.find("li").html()).toContain(
-        'class="disable"'
+        'class="bg-grey-light opacity-60'
       );
     });
 
@@ -53,7 +53,7 @@ describe("TimeSlot component", () => {
         //assert
       
           expect(wrapper.find("li").html()).not.toContain(
-        'class="disable"'
+        'class="class="bg-grey-light opacity-60'
       );
     });
     

@@ -1,7 +1,7 @@
 <template>
   <button
     @click="handleClick"
-    class="button-tab"
+    class="flex items-center text-white border-none rounded-lg h-[50px] w-[160px] justify-center flex-col focus:outline focus:outline-white focus:outline-1"
     :style="{ backgroundColor: backgroundColor }"
   >
     <svg
@@ -17,7 +17,7 @@
         fill="#FFFFFF"
       />
     </svg>
-    <span class="title">{{ title }}</span>
+    <span class="text-white font-sans text-xs font-medium leading-3 capitalize">{{ title }}</span>
   </button>
 </template>
 
@@ -41,30 +41,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss" scoped>
-.button-tab {
-  align-items: center;
-  border: none;
-  border-radius: 10px;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  height: 50px;
-  justify-content: center;
-  width: 160px;
-
-  &:focus {
-    outline: solid 1px var(--font-color-white);
-  }
-}
-
-.title {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 8px;
-  line-height: 9px;
-  text-transform: capitalize;
-}
-</style>

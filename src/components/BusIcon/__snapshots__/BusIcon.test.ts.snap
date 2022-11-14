@@ -1,8 +1,8 @@
 // Vitest Snapshot v1
 
 exports[`Mount component 1`] = `
-"<div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"transportation-type\\" data-v-d5c84748=\\"\\">
-  <div data-v-d5c84748=\\"\\"><img src=\\"/src/assets/icons/bus.svg\\" data-v-d5c84748=\\"\\" /></div>
-  <div aria-labelledby=\\"test\\" data-v-d5c84748=\\"\\">B</div>
+"<div id=\\"test\\" aria-label=\\"B Bus\\" class=\\"border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden\\">
+  <div class=\\"items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light border-r\\"><img src=\\"/src/assets/icons/bus.svg\\" /></div>
+  <div class=\\"items-center inline-flex justify-center w-1/2 h-full align-top font-sans text-black-light\\" aria-labelledby=\\"test\\">B</div>
 </div>"
 `;

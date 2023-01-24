@@ -1,6 +1,6 @@
 <template>
     <Layout>
-      <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables / updated on 31/10/2022</h1>
+      <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables / updated on 22/01/2023</h1>
       <View
         width="100%"
         height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"

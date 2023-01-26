@@ -44,15 +44,13 @@
   
   <script lang="ts">
   import { ref, defineComponent } from "vue";
-  import isEqual from "date-fns/isEqual";
-  import set from "date-fns/set";
   import ButtonTab from "../ButtonTab.vue";
   import Layout from "../Layout/index.vue";
   import TimeSlot from "../TimeSlot/index.vue";
   import View from "../View/index.vue";
   import data from "../../assets/timestables.json";
   import { twentyFourHToIsoDateString } from "../TimeTable/utils/utils";
-  import { formatTime, minutesLeft, timeLeft } from "../../utils";
+  import { formatTime, minutesLeft,isPublicHoliday, timeLeft } from "../../utils";
   import "normalize.css";
   
   type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
@@ -107,18 +105,7 @@
       },
       dayType(){
         const weekEndDays = [0, 6];
-        const publicHolidayStringArray = ["23/01/2023","24/01/2023","25/01/2023","05/04/2023","07/04/2023","08/04/2023","10/04/2023","01/05/2023","26/05/2023","22/06/2023","01/07/2023","30/09/2023","02/10/2023","23/10/2023","25/12/2023","26/12/2023"]
-        const publicHolidayDateArray = publicHolidayStringArray.map((inputString) => new Date(inputString));
-
-        function isPublicHoliday(dateList: Date[], now: Date) {
-          const nowReset = set(now, {
-            hours: 0,
-            minutes: 0,
-            seconds: 0,
-            milliseconds: 0
-          });
-          return dateList.some(date => isEqual(nowReset, date) )
-        }
+        const publicHolidayDateArray = data["public-holiday"].map((inputString) => new Date(inputString));
 
         if (weekEndDays.includes(this.now.getDay()) || isPublicHoliday(publicHolidayDateArray, this.now)) return "weekEndAndPublicHoliday";
   

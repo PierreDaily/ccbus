@@ -16,7 +16,6 @@ module.exports = {
   },
   async viteFinal(config, { configType }) {
     // return the customized config
-    console.log(config)
     return mergeConfig(config, {
       // customize the Vite config here
       resolve: {

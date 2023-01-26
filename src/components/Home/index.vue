@@ -1,6 +1,6 @@
 <template>
     <Layout>
-      <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables / updated on 31/10/2022</h1>
+      <h1 class="items-center text-xs text-white flex font-sans text-normal h-20">Timetables / updated on 22/01/2023</h1>
       <View
         width="100%"
         height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
@@ -50,7 +50,7 @@
   import View from "../View/index.vue";
   import data from "../../assets/timestables.json";
   import { twentyFourHToIsoDateString } from "../TimeTable/utils/utils";
-  import { formatTime, minutesLeft, timeLeft } from "../../utils";
+  import { formatTime, minutesLeft,isPublicHoliday, timeLeft } from "../../utils";
   import "normalize.css";
   
   type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
@@ -76,7 +76,6 @@
         ?.querySelector<HTMLElement>(":root")
         ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
       window.addEventListener("resize", () => {
-        console.log("resize");
         document
           ?.querySelector<HTMLElement>(":root")
           ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
@@ -95,7 +94,6 @@
         allTable.sort((a, b) => {
           return a.time > b.time ? 1 : -1;
         });
-        console.log(allTable)
         return allTable.map((obj) =>({...obj, time: this.twentyFourHToIsoDateString(obj.time)}) ).filter((obj) => obj.time !== "");
       },
       indexToFocus() {
@@ -105,7 +103,9 @@
       },
       dayType(){
         const weekEndDays = [0, 6];
-        if (weekEndDays.includes(this.now.getDay())) return "weekEndAndPublicHoliday";
+        const publicHolidayDateArray = data["public-holiday"].map((inputString) => new Date(inputString));
+
+        if (weekEndDays.includes(this.now.getDay()) || isPublicHoliday(publicHolidayDateArray, this.now)) return "weekEndAndPublicHoliday";
   
         return "weekDay";
       }

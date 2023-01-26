@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@mdx-js/react": "^2.1.2",
+    "date-fns": "^2.29.3",
     "normalize.css": "^8.0.1",
     "vite-plugin-mdx": "^3.5.10",
     "vue": "^3.2.25",

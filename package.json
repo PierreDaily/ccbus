@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test": "vitest --config ./vitest.config.ts",
     "coverage": "vitest run --coverage",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

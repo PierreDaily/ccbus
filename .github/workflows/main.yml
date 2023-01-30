@@ -4,7 +4,6 @@
 name: Runs All Unit tests
 
 on:
-  push:
   pull_request:
     branches: [develop]
 

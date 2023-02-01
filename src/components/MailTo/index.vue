@@ -35,8 +35,7 @@ export default defineComponent({
   props: {
     email: {
       type:String,
-      // default: import.meta.env.VITE_CONTACT_EMAIL,
-      // required: true
+      required: true
     }
   },
   computed: {

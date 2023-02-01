@@ -30,12 +30,12 @@ test("Should create a link to the correct email address", async () => {
     expect(wrapper.attributes('href')).toBe('mailto:john@do.com')
   });
 
-  test("Should create a link to the default email address", async () => {
+  test("Should create a link to on empty anchor", async () => {
     // arrange
     expect(MailTo).toBeTruthy();
   
     const wrapper = mount(MailTo);
   
     // asserts
-    expect(wrapper.attributes('href')).toBe(`mailto:${import.meta.env.VITE_CONTACT_EMAIL}`)
+    expect(wrapper.attributes('href')).toBe("#")
   });

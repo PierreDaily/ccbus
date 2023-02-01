@@ -35,13 +35,13 @@ export default defineComponent({
   props: {
     email: {
       type:String,
-      default: import.meta.env.VITE_CONTACT_EMAIL,
-      required: true
+      // default: import.meta.env.VITE_CONTACT_EMAIL,
+      // required: true
     }
   },
   computed: {
     href() {
-      return `mailto:${this.$props.email}`
+      return this.$props.email ? `mailto:${this.$props.email}` : "#"
     }
   }
 });

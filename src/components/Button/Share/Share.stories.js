@@ -1,5 +1,4 @@
 import Share from './index.vue';
-import { createRouter, createWebHashHistory } from 'vue-router';
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
@@ -9,13 +8,7 @@ export default {
   argTypes: {
   },
 };
-/////////////////////////////
-const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [],
-});
 
-/////////////////////////////
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object

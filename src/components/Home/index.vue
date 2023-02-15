@@ -4,7 +4,10 @@
       <h1 class="items-center text-base text-white flex font-sans text-normal h-20">
         Timetables / updated on 01/02/2023
       </h1>
-      <MailTo :email="email" />
+      <nav class="flex w-16 justify-between">
+        <MailTo :email="email" />
+        <Share to="/share" />
+      </nav>
     </div>
     <View width="100%" height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
       ref="refView">
@@ -30,6 +33,7 @@ import { ref, defineComponent } from "vue";
 import ButtonTab from "../ButtonTab.vue";
 import Layout from "../Layout/index.vue";
 import MailTo from "../MailTo/index.vue";
+import Share from "../Button/Share/index.vue";
 import TimeSlot from "../TimeSlot/index.vue";
 import View from "../View/index.vue";
 import data from "../../assets/timestables.json";
@@ -60,6 +64,7 @@ export default defineComponent({
     MailTo,
     View,
     TimeSlot,
+    Share
   },
   data: () => ({
     activePhase: ((isValidBusStop(localStorage.getItem("activePhase")) &&

@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to">
+    <router-link :to="to" title="close">
         <img class="h-10 w-10" :src="closeIcon" />
     </router-link>
 </template>

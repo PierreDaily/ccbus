@@ -9,7 +9,7 @@
         <Share to="/share" />
       </nav>
     </div>
-    <View width="100%" height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
+    <View width="100%" height="calc(100dvh - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
       ref="refView">
       <ul class="table-container">
         <TimeSlot v-for="({ time, busLetter }, index) in activeTimeTable" :key="index"
@@ -72,16 +72,6 @@ export default defineComponent({
       "bus-stop-2") as BusStop,
     now: new Date(),
   }),
-  created() {
-    document
-      ?.querySelector<HTMLElement>(":root")
-      ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
-    window.addEventListener("resize", () => {
-      document
-        ?.querySelector<HTMLElement>(":root")
-        ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
-    });
-  },
   computed: {
     activeTimeTable(): { time: string; busLetter: string }[] {
       const tableObj = this.allTables[this.activePhase][this.dayType];

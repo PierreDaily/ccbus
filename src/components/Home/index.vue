@@ -1,29 +1,53 @@
 <template>
   <Layout>
     <div class="flex justify-between items-center">
-      <h1 class="items-center text-base text-white flex font-sans text-normal h-20">
-        Timetables / updated on 01/02/2023
+      <h1
+        class="items-center text-base text-white flex font-sans text-normal h-20"
+      >
+        Timetables / updated on 08/12/2023
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />
         <Share to="/share" />
       </nav>
     </div>
-    <View width="100%" height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
-      ref="refView">
+    <View
+      width="100%"
+      height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
+      ref="refView"
+    >
       <ul class="table-container">
-        <TimeSlot v-for="({ time, busLetter }, index) in activeTimeTable" :key="index"
-          :time="formatTime(new Date(time))" :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
-          :isActive="new Date(time || 0) > new Date()" :isFocus="index === indexToFocus"
-          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter" @scrollToActiveSlot="scrollTo" />
+        <TimeSlot
+          v-for="({ time, busLetter }, index) in activeTimeTable"
+          :key="index"
+          :time="formatTime(new Date(time))"
+          :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
+          :isActive="new Date(time || 0) > new Date()"
+          :isFocus="index === indexToFocus"
+          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
+          @scrollToActiveSlot="scrollTo"
+        />
       </ul>
     </View>
     <nav class="flex justify-between mt-[15px]">
-      <ButtonTab title="bus stop 1" :isActive="activePhase === stop1" @userClick="setPhase(stop1)"
-        class="grow mr-2.5" />
-      <ButtonTab title="bus stop 2" :isActive="activePhase === stop2" @userClick="setPhase(stop2)"
-        class="grow mr-2.5" />
-      <ButtonTab title="bus stop 3" :isActive="activePhase === stop3" @userClick="setPhase(stop3)" class="grow mr-0" />
+      <ButtonTab
+        title="bus stop 1"
+        :isActive="activePhase === stop1"
+        @userClick="setPhase(stop1)"
+        class="grow mr-2.5"
+      />
+      <ButtonTab
+        title="bus stop 2"
+        :isActive="activePhase === stop2"
+        @userClick="setPhase(stop2)"
+        class="grow mr-2.5"
+      />
+      <ButtonTab
+        title="bus stop 3"
+        :isActive="activePhase === stop3"
+        @userClick="setPhase(stop3)"
+        class="grow mr-0"
+      />
     </nav>
   </Layout>
 </template>
@@ -64,7 +88,7 @@ export default defineComponent({
     MailTo,
     View,
     TimeSlot,
-    Share
+    Share,
   },
   data: () => ({
     activePhase: ((isValidBusStop(localStorage.getItem("activePhase")) &&
@@ -189,7 +213,7 @@ export default defineComponent({
   margin-top: 15px;
 }
 
-.nav-bar>button {
+.nav-bar > button {
   flex-grow: 1;
 }
 

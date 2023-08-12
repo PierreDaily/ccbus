@@ -1,5 +1,6 @@
 <template>
   <Layout>
+    <Toaster :duration="10000" position="bottom-center" :close-button="true" />
     <div class="flex justify-between items-center">
       <h1
         class="items-center text-base text-white flex font-sans text-normal h-20"
@@ -54,6 +55,7 @@
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
+import { Toaster, toast } from "vue-sonner";
 import ButtonTab from "../ButtonTab.vue";
 import Layout from "../Layout/index.vue";
 import MailTo from "../MailTo/index.vue";
@@ -89,6 +91,7 @@ export default defineComponent({
     View,
     TimeSlot,
     Share,
+    Toaster,
   },
   data: () => ({
     activePhase: ((isValidBusStop(localStorage.getItem("activePhase")) &&
@@ -155,9 +158,18 @@ export default defineComponent({
   watch: {
     activePhase(newPhase) {
       localStorage.setItem("activePhase", newPhase);
+      this.triggerPhase1Err();
     },
   },
   methods: {
+    triggerPhase1Err() {
+      if (!localStorage?.getItem("old-phase1")) {
+        toast.error(
+          `Phase 1 timetables haven't been updated recently. Kindly email us a picture of the latest timetables using the email icon at the top right corner`
+        );
+        localStorage?.setItem("old-phase1", "seen");
+      }
+    },
     setPhase(val: BusStop) {
       this.activePhase = val;
     },
@@ -172,6 +184,7 @@ export default defineComponent({
     setInterval(() => {
       this.now = new Date();
     }, 30000);
+    this.triggerPhase1Err();
   },
   setup() {
     const refView = ref();
@@ -185,6 +198,7 @@ export default defineComponent({
       refView,
       timeLeft,
       twentyFourHToIsoDateString,
+      toast,
     };
   },
 });

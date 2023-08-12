@@ -18,7 +18,8 @@
     "vite-plugin-mdx": "^3.5.10",
     "vue": "^3.2.25",
     "vue-gtag": "^2.0.1",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue-sonner": "^0.4.3"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",

@@ -1,35 +1,61 @@
 <template>
   <Layout>
+    <Toaster :duration="10000" position="bottom-center" :close-button="true" />
     <div class="flex justify-between items-center">
-      <h1 class="items-center text-base text-white flex font-sans text-normal h-20">
-        Timetables / updated on 01/02/2023
+      <h1
+        class="items-center text-base text-white flex font-sans text-normal h-20"
+      >
+        Timetables / updated on 08/12/2023
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />
         <Share to="/share" />
       </nav>
     </div>
-    <View width="100%" height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
-      ref="refView">
+    <View
+      width="100%"
+      height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
+      ref="refView"
+    >
       <ul class="table-container">
-        <TimeSlot v-for="({ time, busLetter }, index) in activeTimeTable" :key="index"
-          :time="formatTime(new Date(time))" :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
-          :isActive="new Date(time || 0) > new Date()" :isFocus="index === indexToFocus"
-          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter" @scrollToActiveSlot="scrollTo" />
+        <TimeSlot
+          v-for="({ time, busLetter }, index) in activeTimeTable"
+          :key="index"
+          :time="formatTime(new Date(time))"
+          :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
+          :isActive="new Date(time || 0) > new Date()"
+          :isFocus="index === indexToFocus"
+          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
+          @scrollToActiveSlot="scrollTo"
+        />
       </ul>
     </View>
     <nav class="flex justify-between mt-[15px]">
-      <ButtonTab title="bus stop 1" :isActive="activePhase === stop1" @userClick="setPhase(stop1)"
-        class="grow mr-2.5" />
-      <ButtonTab title="bus stop 2" :isActive="activePhase === stop2" @userClick="setPhase(stop2)"
-        class="grow mr-2.5" />
-      <ButtonTab title="bus stop 3" :isActive="activePhase === stop3" @userClick="setPhase(stop3)" class="grow mr-0" />
+      <ButtonTab
+        title="bus stop 1"
+        :isActive="activePhase === stop1"
+        @userClick="setPhase(stop1)"
+        class="grow mr-2.5"
+      />
+      <ButtonTab
+        title="bus stop 2"
+        :isActive="activePhase === stop2"
+        @userClick="setPhase(stop2)"
+        class="grow mr-2.5"
+      />
+      <ButtonTab
+        title="bus stop 3"
+        :isActive="activePhase === stop3"
+        @userClick="setPhase(stop3)"
+        class="grow mr-0"
+      />
     </nav>
   </Layout>
 </template>
 
 <script lang="ts">
 import { ref, defineComponent } from "vue";
+import { Toaster, toast } from "vue-sonner";
 import ButtonTab from "../ButtonTab.vue";
 import Layout from "../Layout/index.vue";
 import MailTo from "../MailTo/index.vue";
@@ -64,7 +90,8 @@ export default defineComponent({
     MailTo,
     View,
     TimeSlot,
-    Share
+    Share,
+    Toaster,
   },
   data: () => ({
     activePhase: ((isValidBusStop(localStorage.getItem("activePhase")) &&
@@ -131,9 +158,18 @@ export default defineComponent({
   watch: {
     activePhase(newPhase) {
       localStorage.setItem("activePhase", newPhase);
+      this.triggerPhase1Err();
     },
   },
   methods: {
+    triggerPhase1Err() {
+      if (!localStorage?.getItem("old-phase1")) {
+        toast.error(
+          `Phase 1 timetables haven't been updated recently. Kindly email us a picture of the latest timetables using the email icon at the top right corner`
+        );
+        localStorage?.setItem("old-phase1", "seen");
+      }
+    },
     setPhase(val: BusStop) {
       this.activePhase = val;
     },
@@ -148,6 +184,7 @@ export default defineComponent({
     setInterval(() => {
       this.now = new Date();
     }, 30000);
+    this.triggerPhase1Err();
   },
   setup() {
     const refView = ref();
@@ -161,6 +198,7 @@ export default defineComponent({
       refView,
       timeLeft,
       twentyFourHToIsoDateString,
+      toast,
     };
   },
 });
@@ -189,7 +227,7 @@ export default defineComponent({
   margin-top: 15px;
 }
 
-.nav-bar>button {
+.nav-bar > button {
   flex-grow: 1;
 }
 

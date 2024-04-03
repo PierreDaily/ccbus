@@ -68,7 +68,6 @@ import {
   isPublicHoliday,
   timeLeft,
 } from "../../utils";
-import "normalize.css";
 
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
 

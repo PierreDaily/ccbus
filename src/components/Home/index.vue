@@ -4,7 +4,7 @@
       <h1
         class="items-center text-base text-white flex font-sans text-normal h-20"
       >
-        Timetables / updated on 03/01/2024
+        Timetables / updated on 02/06/2024
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />

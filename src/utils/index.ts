@@ -1,5 +1,4 @@
-import isEqual from "date-fns/isEqual";
-import set from "date-fns/set";
+import { isEqual, set } from "date-fns";
 
 export function formatTime(date: Date): string {
   const hours = Math.floor(date.getHours());

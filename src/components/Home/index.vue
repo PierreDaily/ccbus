@@ -4,7 +4,7 @@
       <h1
         class="items-center text-base text-white flex font-sans text-normal h-20"
       >
-        Timetables / updated on 08/12/2023
+        Timetables / updated on 02/06/2024
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />
@@ -68,7 +68,6 @@ import {
   isPublicHoliday,
   timeLeft,
 } from "../../utils";
-import "normalize.css";
 
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
 

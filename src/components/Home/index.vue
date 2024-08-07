@@ -4,7 +4,7 @@
       <h1
         class="items-center text-base text-white flex font-sans text-normal h-20"
       >
-        Timetables / updated on 02/06/2024
+        Timetables / updated on 07/08/2024
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />
@@ -19,7 +19,7 @@
       <ul class="table-container">
         <TimeSlot
           v-for="({ time, busLetter }, index) in activeTimeTable"
-          :key="index"
+          :key="time"
           :time="formatTime(new Date(time))"
           :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
           :isActive="new Date(time || 0) > new Date()"

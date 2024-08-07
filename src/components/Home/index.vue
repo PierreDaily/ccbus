@@ -52,23 +52,22 @@
   </Layout>
 </template>
 
-<script lang="ts">
-import { ref, defineComponent } from "vue";
+<script lang="ts" setup>
+import { computed, ref, onBeforeMount, watchEffect, onMounted } from "vue";
+import {
+  isPublicHoliday,
+  formatTime,
+  minutesLeft,
+  timeLeft,
+} from "../../utils";
+import { twentyFourHToIsoDateString } from "../TimeTable/utils/utils";
+import data from "../../assets/timestables.json";
 import ButtonTab from "../ButtonTab.vue";
 import Layout from "../Layout/index.vue";
 import MailTo from "../MailTo/index.vue";
 import Share from "../Button/Share/index.vue";
 import TimeSlot from "../TimeSlot/index.vue";
 import View from "../View/index.vue";
-import data from "../../assets/timestables.json";
-import { twentyFourHToIsoDateString } from "../TimeTable/utils/utils";
-import {
-  formatTime,
-  minutesLeft,
-  isPublicHoliday,
-  timeLeft,
-} from "../../utils";
-
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
 
 function isValidBusStop(busStop: string | null): boolean {
@@ -79,113 +78,93 @@ function isValidBusStop(busStop: string | null): boolean {
   );
 }
 
-export default defineComponent({
-  name: "Home",
-  components: {
-    ButtonTab,
-    Layout,
-    MailTo,
-    View,
-    TimeSlot,
-    Share,
-  },
-  data: () => ({
-    activePhase: ((isValidBusStop(localStorage.getItem("activePhase")) &&
-      localStorage.getItem("activePhase")) ||
-      "bus-stop-2") as BusStop,
-    now: new Date(),
-  }),
-  created() {
+const email = import.meta.env.VITE_CONTACT_EMAIL;
+const stop1 = "bus-stop-1" as BusStop;
+const stop2 = "bus-stop-2" as BusStop;
+const stop3 = "bus-stop-3" as BusStop;
+const activePhase = ref<BusStop>(
+  ((isValidBusStop(localStorage.getItem("activePhase")) &&
+    localStorage.getItem("activePhase")) as BusStop) ||
+    ("bus-stop-2" as BusStop)
+);
+const now = ref(new Date());
+const refView = ref<InstanceType<typeof View> | null>(null);
+
+onBeforeMount(() => {
+  document
+    ?.querySelector<HTMLElement>(":root")
+    ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
+  window.addEventListener("resize", () => {
     document
       ?.querySelector<HTMLElement>(":root")
       ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
-    window.addEventListener("resize", () => {
-      document
-        ?.querySelector<HTMLElement>(":root")
-        ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
+  });
+});
+
+const activeTimeTable = computed((): { time: string; busLetter: string }[] => {
+  const tableObj = data[activePhase.value][dayType.value];
+  let allTable: { time: string; busLetter: string }[] = [];
+  type MyType = "A" | "B" | "CIRCULAR";
+  let key: MyType;
+
+  for (key in tableObj) {
+    allTable = [
+      ...allTable,
+      ...tableObj[key].map((val) => ({ time: val, busLetter: key })),
+    ];
+  }
+  allTable.sort((a, b) => {
+    return a.time > b.time ? 1 : -1;
+  });
+  return allTable
+    .map((obj) => ({
+      ...obj,
+      time: twentyFourHToIsoDateString(obj.time),
+    }))
+    .filter((obj) => obj.time !== "");
+});
+
+const dayType = computed(() => {
+  const weekEndDays = [0, 6];
+  const publicHolidayDateArray = data["public-holiday"].map(
+    (inputString) => new Date(inputString)
+  );
+
+  if (
+    weekEndDays.includes(now.value.getDay()) ||
+    isPublicHoliday(publicHolidayDateArray, now.value)
+  )
+    return "weekEndAndPublicHoliday";
+
+  return "weekDay";
+});
+
+const indexToFocus = computed(() => {
+  return activeTimeTable.value.findIndex((obj) => {
+    return new Date(obj.time || 0).toISOString() > now.value.toISOString();
+  });
+});
+
+function setPhase(val: BusStop) {
+  activePhase.value = val;
+}
+function scrollTo(y: number) {
+  if (refView.value) {
+    refView.value.$el.scrollTo({
+      top: y,
+      behavior: "smooth",
     });
-  },
-  computed: {
-    activeTimeTable(): { time: string; busLetter: string }[] {
-      const tableObj = this.allTables[this.activePhase][this.dayType];
-      let allTable: { time: string; busLetter: string }[] = [];
-      type MyType = "A" | "B" | "CIRCULAR";
-      let key: MyType;
+  }
+}
 
-      for (key in tableObj) {
-        allTable = [
-          ...allTable,
-          ...tableObj[key].map((val) => ({ time: val, busLetter: key })),
-        ];
-      }
-      allTable.sort((a, b) => {
-        return a.time > b.time ? 1 : -1;
-      });
-      return allTable
-        .map((obj) => ({
-          ...obj,
-          time: this.twentyFourHToIsoDateString(obj.time),
-        }))
-        .filter((obj) => obj.time !== "");
-    },
-    indexToFocus() {
-      return this.activeTimeTable.findIndex((obj) => {
-        return new Date(obj.time || 0).toISOString() > this.now.toISOString();
-      });
-    },
-    dayType() {
-      const weekEndDays = [0, 6];
-      const publicHolidayDateArray = data["public-holiday"].map(
-        (inputString) => new Date(inputString)
-      );
+watchEffect(() => {
+  localStorage.setItem("activePhase", activePhase.value);
+});
 
-      if (
-        weekEndDays.includes(this.now.getDay()) ||
-        isPublicHoliday(publicHolidayDateArray, this.now)
-      )
-        return "weekEndAndPublicHoliday";
-
-      return "weekDay";
-    },
-    email() {
-      return import.meta.env.VITE_CONTACT_EMAIL;
-    },
-  },
-  watch: {
-    activePhase(newPhase) {
-      localStorage.setItem("activePhase", newPhase);
-    },
-  },
-  methods: {
-    setPhase(val: BusStop) {
-      this.activePhase = val;
-    },
-    scrollTo(y: number) {
-      this.refView.$el.scrollTo({
-        top: y,
-        behavior: "smooth",
-      });
-    },
-  },
-  mounted() {
-    setInterval(() => {
-      this.now = new Date();
-    }, 30000);
-  },
-  setup() {
-    const refView = ref();
-    return {
-      allTables: data,
-      stop1: "bus-stop-1" as BusStop,
-      stop2: "bus-stop-2" as BusStop,
-      stop3: "bus-stop-3" as BusStop,
-      formatTime,
-      minutesLeft,
-      refView,
-      timeLeft,
-      twentyFourHToIsoDateString,
-    };
-  },
+onMounted(() => {
+  setInterval(() => {
+    now.value = new Date();
+  }, 30000);
 });
 </script>
 

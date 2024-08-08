@@ -12,7 +12,7 @@
       </nav>
     </div>
     <div
-      class="flex flex-col w-full h-full overflow-hidden bg-white rounded-[10px]"
+      class="flex flex-col w-full h-full overflow-scroll bg-white rounded-[10px]"
       ref="refView"
     >
       <ul class="table-container">

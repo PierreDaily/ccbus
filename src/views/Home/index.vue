@@ -11,15 +11,14 @@
         <Share to="/share" />
       </nav>
     </div>
-    <View
-      width="100%"
-      height="calc(calc(100 * var(--vh)) - (0.67em * 2) - 2em - 50px - 15px - (1.5 * 2em))"
+    <div
+      class="flex flex-col w-full h-full overflow-hidden bg-white rounded-[10px]"
       ref="refView"
     >
       <ul class="table-container">
         <TimeSlot
           v-for="({ time, busLetter }, index) in activeTimeTable"
-          :key="time"
+          :key="`${time}-${busLetter}`"
           :time="formatTime(new Date(time))"
           :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
           :isActive="new Date(time || 0) > new Date()"
@@ -28,7 +27,7 @@
           @scrollToActiveSlot="scrollTo"
         />
       </ul>
-    </View>
+    </div>
     <nav class="flex justify-between mt-[15px]">
       <ButtonTab
         title="bus stop 1"
@@ -53,21 +52,20 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, onBeforeMount, watchEffect, onMounted } from "vue";
+import { computed, ref, watchEffect, onMounted } from "vue";
 import {
   isPublicHoliday,
   formatTime,
   minutesLeft,
   timeLeft,
 } from "../../utils";
-import { twentyFourHToIsoDateString } from "../TimeTable/utils/utils";
+import { twentyFourHToIsoDateString } from "../../components/TimeTable/utils/utils";
 import data from "../../assets/timestables.json";
-import ButtonTab from "../ButtonTab.vue";
-import Layout from "../Layout/index.vue";
-import MailTo from "../MailTo/index.vue";
-import Share from "../Button/Share/index.vue";
-import TimeSlot from "../TimeSlot/index.vue";
-import View from "../View/index.vue";
+import ButtonTab from "../../components/ButtonTab.vue";
+import Layout from "../../components/Layout/index.vue";
+import MailTo from "../../components/MailTo/index.vue";
+import Share from "../../components/Button/Share/index.vue";
+import TimeSlot from "../../components/TimeSlot/index.vue";
 type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
 
 function isValidBusStop(busStop: string | null): boolean {
@@ -88,18 +86,7 @@ const activePhase = ref<BusStop>(
     ("bus-stop-2" as BusStop)
 );
 const now = ref(new Date());
-const refView = ref<InstanceType<typeof View> | null>(null);
-
-onBeforeMount(() => {
-  document
-    ?.querySelector<HTMLElement>(":root")
-    ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
-  window.addEventListener("resize", () => {
-    document
-      ?.querySelector<HTMLElement>(":root")
-      ?.style.setProperty("--vh", window.innerHeight / 100 + "px");
-  });
-});
+const refView = ref<HTMLDivElement | null>(null);
 
 const activeTimeTable = computed((): { time: string; busLetter: string }[] => {
   const tableObj = data[activePhase.value][dayType.value];
@@ -150,7 +137,7 @@ function setPhase(val: BusStop) {
 }
 function scrollTo(y: number) {
   if (refView.value) {
-    refView.value.$el.scrollTo({
+    refView.value.scrollTo({
       top: y,
       behavior: "smooth",
     });

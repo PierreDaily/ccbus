@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import Home from "./components/Home/index.vue";
+import Home from "./views//Home/index.vue";
 import Share from "./views/Share/index.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 import VueGtag from "vue-gtag";

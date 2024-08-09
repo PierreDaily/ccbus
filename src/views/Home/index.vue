@@ -1,9 +1,7 @@
 <template>
   <Layout>
     <div class="flex justify-between items-center">
-      <h1
-        class="items-center text-base text-white flex font-sans text-normal h-20"
-      >
+      <h1 class="items-center text-base text-white flex font-sans text-normal">
         Timetables / updated on 07/08/2024
       </h1>
       <nav class="flex w-16 justify-between">
@@ -12,10 +10,10 @@
       </nav>
     </div>
     <div
-      class="flex flex-col w-full h-full overflow-scroll bg-white rounded-[10px]"
+      class="flex flex-col w-full grow overflow-scroll bg-white rounded-[10px]"
       ref="refView"
     >
-      <ul class="table-container">
+      <ul>
         <TimeSlot
           v-for="({ time, busLetter }, index) in activeTimeTable"
           :key="`${time}-${busLetter}`"
@@ -28,7 +26,7 @@
         />
       </ul>
     </div>
-    <nav class="flex justify-between mt-[15px]">
+    <nav class="flex justify-between">
       <ButtonTab
         title="bus stop 1"
         :isActive="activePhase === stop1"
@@ -190,12 +188,6 @@ onMounted(() => {
   margin-right: 0;
 }
 
-.table-container {
-  margin: 0;
-  padding: 0;
-  position: relative;
-}
-
 h1 {
   align-items: center;
   color: var(--font-color-white);
@@ -203,10 +195,7 @@ h1 {
   font-family: "Roboto";
   font-style: normal;
   font-weight: 400;
-  height: 80px;
-  margin: 0;
 
   font-size: 12px;
-  line-height: 14px;
 }
 </style>

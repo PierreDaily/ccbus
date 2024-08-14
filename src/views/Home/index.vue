@@ -9,23 +9,21 @@
         <Share to="/share" />
       </nav>
     </div>
-    <div
-      class="flex flex-col w-full grow overflow-scroll bg-white rounded-[10px]"
+    <ul
+      class="flex flex-col w-full grow overflow-scroll bg-white rounded-[10px] relative"
       ref="refView"
     >
-      <ul>
-        <TimeSlot
-          v-for="({ time, busLetter }, index) in activeTimeTable"
-          :key="`${time}-${busLetter}`"
-          :time="formatTime(new Date(time))"
-          :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
-          :isActive="new Date(time || 0) > new Date()"
-          :isFocus="index === indexToFocus"
-          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
-          @scrollToActiveSlot="scrollTo"
-        />
-      </ul>
-    </div>
+      <TimeSlot
+        v-for="({ time, busLetter }, index) in activeTimeTable"
+        :key="`${time}-${busLetter}`"
+        :time="formatTime(new Date(time))"
+        :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
+        :isActive="new Date(time || 0) > new Date()"
+        :isFocus="index === indexToFocus"
+        :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
+        @scrollToActiveSlot="scrollTo"
+      />
+    </ul>
     <nav class="flex justify-between">
       <ButtonTab
         title="bus stop 1"
@@ -75,9 +73,9 @@ function isValidBusStop(busStop: string | null): boolean {
 }
 
 const email = import.meta.env.VITE_CONTACT_EMAIL;
-const stop1 = "bus-stop-1" as BusStop;
-const stop2 = "bus-stop-2" as BusStop;
-const stop3 = "bus-stop-3" as BusStop;
+const stop1 = "bus-stop-1" satisfies BusStop;
+const stop2 = "bus-stop-2" satisfies BusStop;
+const stop3 = "bus-stop-3" satisfies BusStop;
 const activePhase = ref<BusStop>(
   ((isValidBusStop(localStorage.getItem("activePhase")) &&
     localStorage.getItem("activePhase")) as BusStop) ||
@@ -89,8 +87,8 @@ const refView = ref<HTMLDivElement | null>(null);
 const activeTimeTable = computed((): { time: string; busLetter: string }[] => {
   const tableObj = data[activePhase.value][dayType.value];
   let allTable: { time: string; busLetter: string }[] = [];
-  type MyType = "A" | "B" | "CIRCULAR";
-  let key: MyType;
+  type BusType = "A" | "B" | "CIRCULAR";
+  let key: BusType;
 
   for (key in tableObj) {
     allTable = [
@@ -126,7 +124,7 @@ const dayType = computed(() => {
 
 const indexToFocus = computed(() => {
   return activeTimeTable.value.findIndex((obj) => {
-    return new Date(obj.time || 0).toISOString() > now.value.toISOString();
+    return new Date(obj?.time || 0).toISOString() > now.value.toISOString();
   });
 });
 

@@ -1,8 +1,8 @@
-import Social from './index.vue';
+import Social from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'Social',
+  title: "Social",
   component: Social,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
@@ -16,7 +16,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
 const Template = (args) => ({
   // Components used in your story `template` are defined in the `components` object
-  components: { Social},
+  components: { Social },
   // The story's `args` need to be mapped into the template through the `setup()` method
   setup() {
     return { args };
@@ -31,23 +31,22 @@ export const Whatsapp = Template.bind({});
 export const Messenger = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 
-
 Twitter.args = {
-  app: 'twitter',
-  url: 'ccbus.pandy.community'
+  app: "twitter",
+  url: "ccbus.pandy.community",
 };
 
 Facebook.args = {
-app: 'facebook',
-  url: 'ccbus.pandy.community'
+  app: "facebook",
+  url: "ccbus.pandy.community",
 };
 
 Whatsapp.args = {
-  app: 'whatsapp',
-  url: 'ccbus.pandy.community'
+  app: "whatsapp",
+  url: "ccbus.pandy.community",
 };
 
 Messenger.args = {
-  app: 'messenger',
-  url: 'ccbus.pandy.community'
+  app: "messenger",
+  url: "ccbus.pandy.community",
 };

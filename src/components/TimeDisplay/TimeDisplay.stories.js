@@ -1,14 +1,13 @@
-import DisplayTime from './index.vue';
+import DisplayTime from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'DisplayTime',
+  title: "DisplayTime",
   component: DisplayTime,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    time: {control: { type: 'select' },
-    options: ['9:30 am', '12:00 pm'],
-  },}
+    time: { control: { type: "select" }, options: ["9:30 am", "12:00 pm"] },
+  },
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
@@ -26,5 +25,5 @@ const Template = (args) => ({
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
-    time: '11:30 am',
+  time: "11:30 am",
 };

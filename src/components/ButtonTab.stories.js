@@ -1,13 +1,13 @@
-import MyButton from './ButtonTab.vue';
+import MyButton from "./ButtonTab.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'ButtonTab',
+  title: "ButtonTab",
   component: MyButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-      isActive: { control: 'boolean' },
-      title: { control: 'text' },
+    isActive: { control: "boolean" },
+    title: { control: "text" },
   },
 };
 
@@ -27,7 +27,5 @@ export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
   isActive: true,
-  title: 'Button',
+  title: "Button",
 };
-
-

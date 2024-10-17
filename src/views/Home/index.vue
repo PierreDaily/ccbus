@@ -148,6 +148,12 @@ onMounted(() => {
   setInterval(() => {
     now.value = new Date();
   }, 30000);
+
+  fetch("http://localhost/last-seen")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("last seen", data);
+    });
 });
 </script>
 

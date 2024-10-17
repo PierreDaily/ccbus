@@ -1,14 +1,16 @@
-import CountDown from './index.vue';
+import CountDown from "./index.vue";
 
 // More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
-  title: 'CountDown',
+  title: "CountDown",
   component: CountDown,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    timeLeft: {control: { type: 'select' },
-    options: ['3 min', '13 min', undefined],
-  },}
+    timeLeft: {
+      control: { type: "select" },
+      options: ["3 min", "13 min", undefined],
+    },
+  },
 };
 
 // More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
@@ -26,5 +28,5 @@ const Template = (args) => ({
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
-    timeLeft: '13 min',
+  timeLeft: "13 min",
 };

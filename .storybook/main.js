@@ -14,9 +14,7 @@ module.exports = {
     "name": "@storybook/vue3-vite",
     "options": {}
   },
-  "docs": {
-    "autodocs": "tag"
-  },
+  "docs": {},
   async viteFinal(config, { configType }) {
     // return the customized config
     return mergeConfig(config, {

@@ -1,17 +1,6 @@
 <template>
   <a
-    class="
-      flex
-      items-center
-      text-white
-      border-none
-      rounded-lg
-      h-[24px]
-      w-[24px]
-      justify-center
-      flex-col
-      focus:outline focus:outline-white focus:outline-1
-    "
+    class="flex items-center text-white border-none rounded-lg h-[24px] w-[24px] justify-center flex-col focus:outline focus:outline-white focus:outline-1"
     :href="href"
   >
     <svg
@@ -28,20 +17,13 @@
   </a>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "MailTo",
-  props: {
-    email: {
-      type:String,
-      required: true
-    }
+<script setup lang="ts">
+import { computed } from "vue";
+const { email } = defineProps({
+  email: {
+    type: String,
+    required: true,
   },
-  computed: {
-    href() {
-      return this.$props.email ? `mailto:${this.$props.email}` : "#"
-    }
-  }
 });
+const href = computed(() => (email ? `mailto:${email}` : "#"));
 </script>

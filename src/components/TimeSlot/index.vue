@@ -4,6 +4,7 @@
     class="shrink-0 flex items-center border-solid border-b border-grey-light h-[60px] justify-between px-6 py-0 text-center"
     style=""
     tabindex="0"
+    ref="container"
     :style="{ color: isActive ? 'blue' : 'red' }"
   >
     <BusIcon :busLetter="busLetter" />
@@ -12,37 +13,30 @@
   </li>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onMounted, useTemplateRef, watchEffect } from "vue";
 import BusIcon from "../BusIcon/index.vue";
 import TimeDisplay from "../TimeDisplay/index.vue";
 import CountDown from "../CountDown/index.vue";
 
-export default defineComponent({
-  name: "TimeSlot",
-  components: {
-    BusIcon,
-    CountDown,
-    TimeDisplay,
-  },
-  props: {
-    busLetter: String,
-    time: String,
-    timeLeft: String,
-    isActive: Boolean,
-    isFocus: Boolean,
-  },
-  mounted() {
-    if (this.isFocus) {
-      this.$emit("scrollToActiveSlot", this.$el.offsetTop);
-    }
-  },
-  watch: {
-    isFocus(newIsFocus) {
-      if (newIsFocus) {
-        this.$emit("scrollToActiveSlot", this.$el.offsetTop);
-      }
-    },
-  },
+const container = useTemplateRef("container");
+const { busLetter, time, timeLeft, isActive, isFocus } = defineProps({
+  busLetter: String,
+  time: String,
+  timeLeft: String,
+  isActive: Boolean,
+  isFocus: Boolean,
+});
+const emit = defineEmits(["scrollToActiveSlot"]);
+onMounted(() => {
+  if (isFocus && container.value) {
+    emit("scrollToActiveSlot", container.value.offsetTop);
+  }
+});
+
+watchEffect(() => {
+  if (isFocus && container.value) {
+    emit("scrollToActiveSlot", container.value.offsetTop);
+  }
 });
 </script>

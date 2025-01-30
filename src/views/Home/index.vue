@@ -13,16 +13,18 @@
       class="flex flex-col w-full grow overflow-scroll bg-white rounded-[10px] relative"
       ref="refView"
     >
-      <TimeSlot
+      <li
         v-for="({ time, busLetter }, index) in activeTimeTable"
-        :key="`${time}-${busLetter}`"
-        :time="formatTime(new Date(time))"
-        :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
-        :isActive="new Date(time || 0) > new Date()"
-        :isFocus="index === indexToFocus"
-        :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
-        @scrollToActiveSlot="scrollTo"
-      />
+        :id="`id-${String(index)}`"
+        :key="`${time}-${busLetter}-${activePhase}`"
+      >
+        <TimeSlot
+          :time="formatTime(new Date(time))"
+          :timeLeft="timeLeft(minutesLeft(new Date(time), now))"
+          :isActive="new Date(time || 0) > new Date()"
+          :busLetter="busLetter === 'CIRCULAR' ? 'AB' : busLetter"
+        />
+      </li>
     </ul>
     <nav class="flex justify-between">
       <ButtonTab
@@ -48,7 +50,14 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watchEffect, onMounted } from "vue";
+import {
+  computed,
+  ref,
+  watchEffect,
+  onMounted,
+  watchPostEffect,
+  useTemplateRef,
+} from "vue";
 import {
   isPublicHoliday,
   formatTime,
@@ -82,7 +91,7 @@ const activePhase = ref<BusStop>(
     ("bus-stop-2" as BusStop)
 );
 const now = ref(new Date());
-const refView = ref<HTMLDivElement | null>(null);
+const refView = useTemplateRef("refView");
 
 const activeTimeTable = computed((): { time: string; busLetter: string }[] => {
   const tableObj = data[activePhase.value][dayType.value];
@@ -122,26 +131,24 @@ const dayType = computed(() => {
   return "weekDay";
 });
 
-const indexToFocus = computed(() => {
-  return activeTimeTable.value.findIndex((obj) => {
-    return new Date(obj?.time || 0).toISOString() > now.value.toISOString();
-  });
-});
-
 function setPhase(val: BusStop) {
   activePhase.value = val;
-}
-function scrollTo(y: number) {
-  if (refView.value) {
-    refView.value.scrollTo({
-      top: y,
-      behavior: "smooth",
-    });
-  }
 }
 
 watchEffect(() => {
   localStorage.setItem("activePhase", activePhase.value);
+});
+
+watchPostEffect(() => {
+  const indexToFocus = activeTimeTable.value.findIndex((obj) => {
+    return new Date(obj?.time || 0).toISOString() > now.value.toISOString();
+  });
+
+  if (refView.value) {
+    refView.value
+      .querySelector(`#id-${String(indexToFocus)}`)
+      ?.scrollIntoView({ behavior: "smooth" });
+  }
 });
 
 onMounted(() => {

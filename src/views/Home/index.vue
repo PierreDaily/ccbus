@@ -182,7 +182,7 @@ onMounted(() => {
 }
 
 .nav-bar > button {
-  flex-grow: 1;
+  grow: 1;
 }
 
 .nav-bar button:nth-of-type(n) {

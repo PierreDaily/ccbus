@@ -1,5 +1,5 @@
 <template>
-  <div id ="test" aria-label="B Bus" class="border border-solid border-grey-light h-[25px] w-[50px] rounded-sm overflow-hidden">
+  <div id ="test" aria-label="B Bus" class="border border-solid border-grey-light h-[25px] w-[50px] rounded-xs overflow-hidden">
     <div class="items-center inline-flex justify-center w-1/2 h-full bg-bus-green border-r-grey-light  border-r">
       <img :src="busIcon" />
     </div>

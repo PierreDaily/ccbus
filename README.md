@@ -1,11 +1,79 @@
-# Vue 3 + Typescript + Vite
+# CCBus - Caribbean Coast Shuttle Bus Timetables
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+CCBus is a web application that provides shuttle bus timetables for the Caribbean Coast community. Built with Vue 3, TypeScript, and Vite, this project aims to deliver a user-friendly interface for accessing bus schedules.
 
-## Recommended IDE Setup
+## Features
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+- **Real-time Countdown**: Displays the time left for the next bus arrival.
+- **Dynamic Timetables**: Automatically adjusts based on weekdays, weekends, and public holidays.
+- **Social Sharing**: Share the app link via Twitter, Facebook, WhatsApp, and Messenger.
+- **Responsive Design**: Optimized for both desktop and mobile devices.
+- **Storybook Integration**: Component-driven development with Storybook.
 
-## Type Support For `.vue` Imports in TS
+## Tech Stack
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+- **Frontend**: Vue 3, TypeScript, TailwindCSS
+- **Build Tool**: Vite
+- **Testing**: Vitest, Vue Test Utils
+- **Storybook**: For UI component documentation and testing
+- **CI/CD**: GitHub Actions for automated testing
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v20.x or higher)
+- npm (v7.x or higher)
+
+### Installation
+
+1.  Clone the repository:
+
+    git clone https://github.com/PierreDaily/ccbus.git
+
+    cd ccbus
+
+2.  Install dependencies
+
+        npm install
+
+### Development
+
+Start the development server:
+
+    npm run dev
+
+The app will be available at http://localhost:5173
+
+Build
+
+    To build the project for production:
+
+    npm run build
+
+### Testing
+
+Run unit tests:
+
+    npm run test
+
+Generate test coverage:
+
+    npm run coverage
+
+### Storybook
+
+Start Storybook for component development:
+
+    npm run storybook
+
+Build Storybook:
+
+    npm run build-storybook
+
+### Environment Variables
+
+The following environment variables are required:
+
+    VITE_CONTACT_EMAIL : Contact email address for the app.
+    VITE_GOOGLE_ANALYTICS_ID : Google Analytics tracking ID (optional).

@@ -2,7 +2,7 @@
   <Layout>
     <div class="flex justify-between items-center">
       <h1 class="items-center text-base text-white flex font-sans text-normal">
-        Timetables / updated on 29/01/2025
+        Timetables / updated on 24/04/2025
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />

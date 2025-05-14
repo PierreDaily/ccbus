@@ -2,7 +2,7 @@
   <Layout>
     <div class="flex justify-between items-center">
       <h1 class="items-center text-base text-white flex font-sans text-normal">
-        Timetables / updated on 24/04/2025
+        Timetables / updated on 14/05/2025
       </h1>
       <nav class="flex w-16 justify-between">
         <MailTo :email="email" />
@@ -64,14 +64,14 @@ import {
   minutesLeft,
   timeLeft,
 } from "../../utils";
-import { twentyFourHToIsoDateString } from "../../components/TimeTable/utils/utils";
+import type { BusStop, DayType } from "../../types";
 import data from "../../assets/timestables.json";
 import ButtonTab from "../../components/ButtonTab.vue";
 import Layout from "../../components/Layout/index.vue";
 import MailTo from "../../components/MailTo/index.vue";
 import Share from "../../components/Button/Share/index.vue";
 import TimeSlot from "../../components/TimeSlot/index.vue";
-type BusStop = "bus-stop-1" | "bus-stop-2" | "bus-stop-3";
+import { parseJsonTable } from "./utils";
 
 function isValidBusStop(busStop: string | null): boolean {
   return (
@@ -93,30 +93,14 @@ const activePhase = ref<BusStop>(
 const now = ref(new Date());
 const refView = useTemplateRef("refView");
 
-const activeTimeTable = computed((): { time: string; busLetter: string }[] => {
-  const tableObj = data[activePhase.value][dayType.value];
-  let allTable: { time: string; busLetter: string }[] = [];
-  type BusType = "A" | "B" | "CIRCULAR";
-  let key: BusType;
+const timeTables = ref(parseJsonTable(data));
 
-  for (key in tableObj) {
-    allTable = [
-      ...allTable,
-      ...tableObj[key].map((val) => ({ time: val, busLetter: key })),
-    ];
-  }
-  allTable.sort((a, b) => {
-    return a.time > b.time ? 1 : -1;
-  });
-  return allTable
-    .map((obj) => ({
-      ...obj,
-      time: twentyFourHToIsoDateString(obj.time),
-    }))
-    .filter((obj) => obj.time !== "");
-});
+const activeTimeTable = computed(
+  (): { time: string; busLetter: string }[] =>
+    timeTables.value[activePhase.value][dayType.value]
+);
 
-const dayType = computed(() => {
+const dayType = computed<DayType>(() => {
   const weekEndDays = [0, 6];
   const publicHolidayDateArray = data["public-holiday"].map(
     (inputString) => new Date(inputString)

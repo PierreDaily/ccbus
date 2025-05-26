@@ -3,7 +3,7 @@ import App from "./App.vue";
 import Home from "./views//Home/index.vue";
 import Share from "./views/Share/index.vue";
 import { createRouter, createWebHashHistory } from "vue-router";
-import VueGtag from "vue-gtag";
+import { createGtag } from "vue-gtag";
 
 const routes = [
   { path: "/", component: Home },
@@ -16,11 +16,10 @@ const router = createRouter({
   routes, // short for `routes: routes`
 });
 
-createApp(App)
-  .use(router)
-  .use(VueGtag, {
-    config: {
-      id: import.meta.env.PROD && import.meta.env.VITE_GOOGLE_ANALYTICS_ID,
-    },
-  })
-  .mount("#app");
+createGtag({
+  tagId: import.meta.env.VITE_GA_MEASURMENT_ID,
+  pageTracker: {
+    router, // <----- add your router here
+  },
+});
+createApp(App).use(router).mount("#app");
